@@ -1,0 +1,24 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link type = "text/css" rel="stylesheet" href="{%static 'myappAccount/css/style.css' %}"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% block mainmenu %}
+    {%for elem in menu %}   
+        <li><a href="{%url elem.url_name %}">{{elem.title}}</a></li>
+    {%endfor%}  
+
+    {%endblock%}
+        </ul>
+
+    {%block content%}
+    {%endblock%}
+
+</body>
+</html>
