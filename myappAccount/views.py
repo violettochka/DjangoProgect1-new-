@@ -1,20 +1,32 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-
+from myappArticles.models import *
 menu = [
     {'title': 'login', 'url_name': 'login'},
     {'title': 'registration', 'url_name': 'registration'},
     {'title': 'main_page', 'url_name': 'main'},
-    {'title': 'details', 'url_name': 'details'},
+    #{'title': 'details', 'url_name': 'details'},
     {'title': 'create_new_blog', 'url_name': 'new-blog'}
 ]
 
 
 def main(request):
-    return render(request, 'myappAccount/main_page.html', {'menu': menu})
+    posts = Article.objects.all()
+    context = {
+        'posts':posts,
+        'menu': menu
+    }
+    return render(request, 'myappAccount/main_page.html', context=context)
 
-def about(request):
-    return render(request, 'myappAccount/details.html', {'menu': menu})
+def details(request, topic_id):
+    dets = Topic.objects.get(id = topic_id)
+    comments = Comment.objects.filter(article=topic_id)
+    context = {
+        'dets':dets,
+        'menu': menu,
+        'comments':comments
+    }
+    return render(request, 'myappAccount/details.html', context=context)
 
 def profile(reguest, username):
     return HttpResponse(f'Hey, {username}, it is your own page on the site')

@@ -1,5 +1,15 @@
 {%extends 'myappAccount/base.html'%}
 
 {%block content%}
-<br><h1>Details</h1></br>
+<br><h1>{{dets.title}}</h1></br>
+<p>{{dets.description}}</p>
+{%if comments%}
+    <br><h2>Комментарии пользователей</h2></br>
+    {%for comment in comments%}
+        <p>{{comment.message}}</p>
+    {%endfor%}    
+{%endif%}  
+{%if not comments%}      
+    <br><h2>Комментариев к этому посту нет</h2></br>  
+{%endif%}
 {%endblock%}
